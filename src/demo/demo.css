@@ -1,0 +1,304 @@
+/* Estilos globales mínimos de la demo + asistente (wizard) */
+body {
+  margin: 0;
+  background: var(--paisaje-bg);
+}
+
+/* ---------- Asistente por pasos ---------- */
+.wz-progress {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.wz-progress li {
+  padding: 6px 14px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: 999px;
+  background: var(--paisaje-surface);
+  font-size: 0.85rem;
+  color: var(--paisaje-muted);
+}
+
+.wz-progress li.is-active {
+  background: var(--paisaje-accent);
+  border-color: var(--paisaje-accent);
+  color: #fff;
+}
+
+.wz-progress li.is-done {
+  border-color: var(--paisaje-accent);
+  color: var(--paisaje-accent);
+}
+
+.wz-step-num {
+  font-weight: 700;
+}
+
+.wz-check {
+  font-weight: 700;
+}
+
+/* Selector de estilos */
+.wz-styles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.wz-style {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background: var(--paisaje-surface);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wz-style:hover:not(:disabled) {
+  border-color: var(--paisaje-accent);
+}
+
+.wz-style.is-active {
+  border-color: var(--paisaje-accent);
+  background: var(--paisaje-accent-soft);
+}
+
+.wz-style:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.wz-soon {
+  font-size: 0.72rem;
+  color: var(--paisaje-muted);
+  font-style: italic;
+}
+
+.wz-ok {
+  color: #2e7d32;
+  font-size: 0.9rem;
+}
+
+.wz-loudness {
+  font-size: 0.9rem;
+  background: var(--paisaje-info-soft);
+  border: 1px solid #7fa8cc;
+  border-radius: var(--paisaje-radius);
+  padding: 8px 12px;
+}
+
+.wz-player-config {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+
+.wz-player-config input[type="range"] {
+  accent-color: var(--paisaje-accent);
+  vertical-align: middle;
+}
+
+/* Resumen */
+.wz-summary {
+  background: var(--paisaje-surface);
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  padding: 16px 20px;
+  line-height: 1.9;
+  box-shadow: var(--paisaje-shadow);
+}
+
+.wz-summary code {
+  background: var(--paisaje-bg);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+/* Campo del título de la pieza (F1 2026-10-11) */
+.wz-title-field {
+  margin-bottom: 14px;
+}
+
+.wz-title-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.wz-required {
+  color: var(--paisaje-danger);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.wz-title-input {
+  width: 100%;
+  max-width: 520px;
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background: var(--paisaje-surface);
+  color: var(--paisaje-text);
+}
+
+.wz-title-input:focus-visible {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 1px;
+}
+
+/* F2.5 (2026-10-11) · Encuadre de la pieza en el paso 3: el preview es una
+   réplica inerte de la vista publicada y TODO el gesto sobre él es arrastre
+   (el contenido se mueve detrás del círculo fijo). */
+.wz-pan-block {
+  margin-bottom: 14px;
+}
+
+.wz-pan-wrap {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.wz-pan-wrap:active {
+  cursor: grabbing;
+}
+
+/* El player del preview no intercepta nada: que el arrastre lo reciba el
+   wrapper entero (también sobre el botón, que va inerte). */
+.wz-pan-wrap .paisaje-player {
+  pointer-events: none;
+}
+
+.wz-pan-reset {
+  margin-left: 10px;
+  padding: 2px 12px;
+  font-size: 0.8rem;
+}
+
+/* Navegación del asistente */
+.wz-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.wz-footer .wz-primary {
+  width: auto;
+  min-width: 200px;
+}
+
+.wz-back:disabled {
+  visibility: hidden;
+}
+
+/* ---------- Subida de audio: progreso y bloqueo ---------- */
+.wz-upload-status {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--paisaje-surface);
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  box-shadow: var(--paisaje-shadow);
+}
+
+.wz-upload-status p {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+
+/* "Listo" tras completar: ~2 s visible y fundido de salida (el estado se
+   desmonta a los 2 s; la animación amortigua la desaparición). */
+.wz-ready {
+  color: #2e7d32;
+  font-weight: 600;
+  animation: wz-ready-fade 2s ease forwards;
+}
+
+@keyframes wz-ready-fade {
+  0%, 75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Barra indeterminada (fase PROCESADO: el navegador no sabe el avance del
+   ffmpeg en el servidor — no se finge porcentaje). */
+.wz-indeterminate {
+  overflow: hidden;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--paisaje-bg);
+  border: 1px solid var(--paisaje-border);
+}
+
+.wz-indeterminate-bar {
+  display: block;
+  height: 100%;
+  width: 40%;
+  border-radius: 999px;
+  background: var(--paisaje-accent);
+  animation: wz-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes wz-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* Capa semitransparente sobre el reproductor mientras se sube/procesa. */
+.wz-player-wrap {
+  position: relative;
+}
+
+.wz-player-lock {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: rgb(247 245 242 / 78%);
+  border-radius: var(--paisaje-radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--paisaje-text);
+}
+
+.wz-audio-ok {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  background: #e6f4e7;
+  border: 1px solid #4c9a52;
+  border-radius: var(--paisaje-radius);
+  color: #2e7d32;
+  font-size: 0.9rem;
+}
+
+/* Vista publicada */
+.wz-published {
+  max-width: 720px;
+}
+
+.wz-create-another {
+  margin-top: 16px;
+}
+
+.wz-create-another a {
+  color: var(--paisaje-accent);
+}

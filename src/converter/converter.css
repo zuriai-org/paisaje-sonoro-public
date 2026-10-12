@@ -1,0 +1,455 @@
+/* Estilos del conversor — CSS simple, themable con variables (DISENO.md §2.6) */
+
+:root {
+  --paisaje-bg: #f7f5f2;
+  --paisaje-surface: #ffffff;
+  --paisaje-text: #22201d;
+  --paisaje-muted: #7a756e;
+  /* F1 (2026-10-11): disco del círculo de la vista publicada y tinta del
+     título. Anulables por quien embeba la vista (revista). */
+  --paisaje-disc: #ffffff;
+  --paisaje-ink: #22201d;
+  --paisaje-accent: #b3541e;
+  --paisaje-accent-soft: #f3e2d5;
+  --paisaje-danger: #a83232;
+  --paisaje-danger-soft: #f7e3e3;
+  --paisaje-warning-soft: #faf3d7;
+  --paisaje-info-soft: #e4eef7;
+  --paisaje-border: #e2ddd6;
+  --paisaje-radius: 10px;
+  --paisaje-shadow: 0 1px 3px rgb(34 32 29 / 8%);
+  --paisaje-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.paisaje-converter {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  font-family: var(--paisaje-font);
+  color: var(--paisaje-text);
+}
+
+.paisaje-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+.paisaje-subtitle {
+  margin: 0 0 20px;
+  color: var(--paisaje-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Dropzone ---------- */
+.paisaje-dropzone {
+  border: 2px dashed var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background: var(--paisaje-surface);
+  padding: 28px 20px;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.paisaje-dropzone p {
+  margin: 0 0 6px;
+}
+
+.paisaje-dropzone.is-dragging {
+  border-color: var(--paisaje-accent);
+  background: var(--paisaje-accent-soft);
+}
+
+.paisaje-file-label {
+  color: var(--paisaje-accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.paisaje-file-input {
+  display: none;
+}
+
+.paisaje-hint {
+  color: var(--paisaje-muted);
+  font-size: 0.8rem;
+}
+
+/* ---------- Banners ---------- */
+.paisaje-banner {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--paisaje-radius);
+  font-size: 0.9rem;
+  box-shadow: var(--paisaje-shadow);
+}
+
+.paisaje-banner p {
+  margin: 0 0 4px;
+}
+
+.paisaje-banner p:last-child {
+  margin-bottom: 0;
+}
+
+.paisaje-banner-error {
+  background: var(--paisaje-danger-soft);
+  border: 1px solid var(--paisaje-danger);
+  color: var(--paisaje-danger);
+}
+
+.paisaje-banner-warning {
+  background: var(--paisaje-warning-soft);
+  border: 1px solid #d8b84a;
+}
+
+.paisaje-banner-info {
+  background: var(--paisaje-info-soft);
+  border: 1px solid #7fa8cc;
+}
+
+/* ---------- Layout de paneles ---------- */
+.paisaje-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (max-width: 760px) {
+  .paisaje-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.paisaje-panel {
+  background: var(--paisaje-surface);
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  padding: 16px;
+  box-shadow: var(--paisaje-shadow);
+}
+
+.paisaje-panel h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+/* ---------- Parámetros ---------- */
+.paisaje-param {
+  margin-bottom: 14px;
+}
+
+.paisaje-param-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--paisaje-muted);
+  margin-bottom: 4px;
+}
+
+.paisaje-param-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.paisaje-param-controls input[type="range"] {
+  flex: 1;
+  accent-color: var(--paisaje-accent);
+}
+
+.paisaje-param-num {
+  width: 64px;
+  padding: 4px 6px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: 6px;
+  font: inherit;
+  text-align: right;
+}
+
+.paisaje-seed {
+  width: 110px;
+}
+
+.paisaje-help {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--paisaje-muted);
+}
+
+.paisaje-stats {
+  margin: 16px 0;
+  padding: 10px 12px;
+  background: var(--paisaje-bg);
+  border-radius: var(--paisaje-radius);
+  font-size: 0.85rem;
+  color: var(--paisaje-muted);
+}
+
+.paisaje-stats p {
+  margin: 2px 0;
+}
+
+/* ---------- Botones ---------- */
+.paisaje-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: 8px;
+  background: var(--paisaje-surface);
+  font: inherit;
+  cursor: pointer;
+}
+
+.paisaje-btn:hover:not(:disabled) {
+  border-color: var(--paisaje-accent);
+}
+
+.paisaje-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paisaje-btn-primary {
+  width: 100%;
+  background: var(--paisaje-accent);
+  border-color: var(--paisaje-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.paisaje-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+/* ---------- Preview ---------- */
+.paisaje-preview {
+  display: flex;
+  flex-direction: column;
+}
+
+.paisaje-canvas {
+  align-self: center;
+  max-width: 100%;
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background:
+    repeating-conic-gradient(#eee 0% 25%, #fff 0% 50%) 0 0 / 16px 16px; /* fondo de transparencia */
+}
+
+/* ---------- Posterizado · tarjetas de capa, paleta y raster ---------- */
+.wz-layer-card {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background: #fff;
+}
+
+.wz-layer-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.wz-band-label {
+  font-size: 0.85rem;
+  color: var(--paisaje-muted, #666);
+}
+
+.wz-swatch {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: 4px;
+  flex: none;
+}
+
+.wz-palette-row {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0 2px;
+}
+
+/* Candidatos del histograma absorbidos por fusión (transparencia de la
+   selección 6→4): grisáceos y tachados en diagonal. */
+.wz-merged-row {
+  align-items: center;
+  margin-top: 0;
+}
+
+.wz-swatch-merged {
+  filter: grayscale(1);
+  opacity: 0.5;
+  background-image: linear-gradient(
+    to top right,
+    transparent 45%,
+    rgba(20, 20, 20, 0.85) 46%,
+    rgba(20, 20, 20, 0.85) 54%,
+    transparent 55%
+  ) !important;
+}
+
+.wz-swatch-btn {
+  cursor: pointer;
+  padding: 0;
+}
+
+.wz-swatch-btn.is-active {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 1px;
+}
+
+.wz-bw-toggle {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 4px 0 8px;
+  font-weight: 600;
+}
+
+.wz-raster-preview {
+  display: block;
+  margin-bottom: 10px;
+}
+
+
+/* ---------- Azimutal (AZ-2): tarjetas de keyframes ---------- */
+.az-keyframes {
+  grid-column: 1 / -1; /* el editor de keyframes ocupa todo el ancho */
+}
+
+.az-keyframe-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.az-keyframe-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  background: var(--paisaje-surface);
+}
+
+.az-keyframe-card.is-active {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 1px;
+}
+
+.az-keyframe-select {
+  align-self: flex-start;
+}
+
+.az-keyframe-preview {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--paisaje-border);
+  border-radius: calc(var(--paisaje-radius) - 2px);
+  background: var(--paisaje-surface);
+}
+
+
+/* ---------- Azimutal (AZ-3): preview héroe ---------- */
+.az-hero {
+  grid-column: 1 / -1;
+}
+
+.az-hero-canvas {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--paisaje-border);
+  border-radius: calc(var(--paisaje-radius) - 2px);
+  background: #ffffff; /* SOLO el preview: la pieza publicada es transparente */
+}
+
+.az-advanced summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+
+/* ---------- Azimutal (AZ-3 reescritura): editor por pestañas ---------- */
+.az-editor-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .az-editor-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.az-hero-canvas {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--paisaje-border);
+  border-radius: calc(var(--paisaje-radius) - 2px);
+  background: #ffffff; /* SOLO el preview: la pieza publicada es transparente */
+}
+
+.az-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 10px 0 6px;
+}
+
+.az-tab.is-active {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 1px;
+}
+
+.az-tab-warning {
+  color: var(--paisaje-warning, #9a6b00);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.az-tab-reset {
+  margin-left: auto;
+}
+
+.az-seq-speed {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.az-speed.is-active {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 1px;
+}
+
+.az-advanced summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.az-orbit-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.la-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

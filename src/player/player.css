@@ -1,0 +1,200 @@
+/* Estilos del reproductor — coherentes con las variables del conversor (§3.6) */
+
+.paisaje-player {
+  font-family: var(--paisaje-font);
+  color: var(--paisaje-text);
+}
+
+.paisaje-player-header {
+  margin-bottom: 10px;
+}
+
+.paisaje-player-title {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+}
+
+.paisaje-player-desc {
+  margin: 0;
+  color: var(--paisaje-muted);
+  font-size: 0.9rem;
+}
+
+.paisaje-player-stage {
+  position: relative;
+  background: var(--paisaje-surface);
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  box-shadow: var(--paisaje-shadow);
+  padding: 8px;
+}
+
+.paisaje-svg {
+  display: block;
+  /* Corrección fase 5: 900 px de alto CSS, ancho proporcional al viewBox */
+  height: 900px;
+  max-height: 90vh;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: calc(var(--paisaje-radius) - 4px);
+}
+
+.paisaje-player-hint {
+  color: var(--paisaje-muted);
+  padding: 24px;
+  text-align: center;
+}
+
+.paisaje-suspended {
+  position: absolute;
+  inset: auto 12px 12px auto;
+  padding: 6px 12px;
+  border: 1px solid var(--paisaje-warning-soft);
+  border-radius: 8px;
+  background: var(--paisaje-warning-soft);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ---------- Controles ---------- */
+.paisaje-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--paisaje-surface);
+  border: 1px solid var(--paisaje-border);
+  border-radius: var(--paisaje-radius);
+  box-shadow: var(--paisaje-shadow);
+}
+
+.paisaje-play {
+  min-width: 42px;
+  font-size: 1rem;
+}
+
+.paisaje-progress {
+  flex: 1;
+  accent-color: var(--paisaje-accent);
+}
+
+.paisaje-volume {
+  width: 90px;
+  accent-color: var(--paisaje-accent);
+}
+
+.paisaje-time {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--paisaje-muted);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ---------- Variante 'minimal' (vista publicada /p/:id, P3 2026-09-24) ----------
+   Chrome sobrio para el lector: solo la imagen animada + este conjunto
+   (play/pausa circular + contador m:ss debajo), abajo a la DERECHA.
+   Micro 2026-09-24: botón a la derecha y borde 3.5 px (elemento principal). */
+.paisaje-minimal-chrome {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* el contador queda centrado bajo el círculo */
+  gap: 4px;
+}
+
+.paisaje-play-minimal {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 3.5px solid var(--paisaje-text); /* se nota como elemento principal */
+  background: var(--paisaje-surface);
+  color: var(--paisaje-text); /* el icono hereda el negro del borde */
+  font: inherit;
+  cursor: pointer;
+}
+
+.paisaje-play-minimal svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.paisaje-play-minimal:focus-visible {
+  outline: 2px solid var(--paisaje-accent);
+  outline-offset: 2px;
+}
+
+.paisaje-play-minimal:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Contador m:ss: tipografía sobria y pequeña, negro, centrado con el círculo. */
+.paisaje-minimal-time {
+  font-size: 0.8rem;
+  color: var(--paisaje-text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- F1 (2026-10-11): presentación en círculo + pie de pieza ----------
+   Disco de fondo detrás del contenido (solo 'minimal'). Blanco por defecto
+   vía --paisaje-disc; si la variable se anula, el disco es transparente. */
+.paisaje-disc {
+  fill: var(--paisaje-disc, transparent);
+}
+
+/* Título de la pieza DENTRO del cuadro (ajuste del usuario 2026-10-11):
+   esquina inferior derecha, justo encima del chrome (botón 52 px + gap +
+   timer ≈ 75 px, margen 16 px → bottom 100 px). Alineado a la derecha con
+   el borde del botón; tinta sobria. El stage ya es position: relative. */
+.paisaje-minimal-title {
+  position: absolute;
+  right: 16px;
+  bottom: 100px;
+  margin: 0;
+  max-width: 60%;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--paisaje-ink, #22201d);
+}
+
+/* Descripción opcional (loudness) bajo el cuadro: centrada, cuerpo menor. */
+.paisaje-minimal-caption {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.paisaje-minimal-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--paisaje-ink, #22201d);
+  opacity: 0.75;
+}
+
+.paisaje-mode-selector {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--paisaje-text);
+}
+
+.paisaje-mode-selector select {
+  font: inherit;
+  padding: 4px 8px;
+  border: 1px solid var(--paisaje-border);
+  border-radius: 6px;
+  background: var(--paisaje-surface);
+}
+
+.paisaje-audio-element {
+  display: none;
+}
