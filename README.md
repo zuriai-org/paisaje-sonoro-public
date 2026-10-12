@@ -1,4 +1,5 @@
 # paisaje-sonoro
+Herramienta de paisajes sonoros para periodismo multimedia — **Autoría: Cristian Vergara, 2026**.
 
 Herramienta web con la que una redacción convierte **una imagen y un audio** en una pieza de paisaje sonoro: la imagen —puntos, trazos de grabado, 4 capas de color o una órbita azimutal— se dibuja y respira con el audio, y el lector la reproduce en una vista publicada (`/p/:id`).
 
